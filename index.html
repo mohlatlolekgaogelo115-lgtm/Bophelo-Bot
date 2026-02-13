@@ -9,12 +9,14 @@
         :root {
             --primary-blue: #0056b3;
             --secondary-blue: #007bff;
-            --light-blue: #e7f2f8;
+            --light-blue: #f0f7ff;
             --light-green: #2ecc71;
             --white: #ffffff;
             --text-dark: #2d3436;
             --text-muted: #636e72;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --glass: rgba(255, 255, 255, 0.8);
         }
 
         * {
@@ -25,15 +27,16 @@
         }
 
         body {
-            background-color: var(--white);
+            background-color: #fdfdfd;
             color: var(--text-dark);
             line-height: 1.6;
             scroll-behavior: smooth;
         }
 
-        /* Navbar */
+        /* Navbar Enhancements */
         nav {
-            background: var(--white);
+            background: var(--glass);
+            backdrop-filter: blur(10px);
             padding: 1rem 5%;
             display: flex;
             justify-content: space-between;
@@ -41,7 +44,7 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
         }
 
         .logo {
@@ -49,6 +52,7 @@
             font-weight: 700;
             color: var(--primary-blue);
             text-decoration: none;
+            letter-spacing: -0.5px;
         }
 
         .nav-links {
@@ -61,177 +65,118 @@
             text-decoration: none;
             color: var(--text-dark);
             font-weight: 500;
-            transition: color 0.3s;
+            transition: 0.3s;
         }
 
-        .nav-links a:hover {
-            color: var(--primary-blue);
-        }
+        .nav-links a:hover { color: var(--primary-blue); }
 
         /* Hero Section */
         .hero {
-            padding: 5rem 5% 2rem;
+            padding: 8rem 5% 5rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: linear-gradient(135deg, var(--white) 60%, var(--light-blue) 100%);
+            background: radial-gradient(circle at top right, var(--light-blue), transparent 40%);
         }
 
-        .hero-content {
-            max-width: 600px;
-        }
-
+        .hero-content { max-width: 600px; }
         .hero h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             color: var(--primary-blue);
-            margin-bottom: 1rem;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-        }
-
-        .btn-primary {
-            background: var(--primary-blue);
-            color: white;
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: transform 0.2s;
-            display: inline-block;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-        }
-
-        /* Sections */
-        section {
-            padding: 5rem 5%;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary-blue);
-        }
-
-        /* About Section */
-        #about {
-            background-color: #f9fbfc;
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-card {
-            background: white;
-            padding: 2.5rem 2rem;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
-            text-align: center;
-        }
-
-        .feature-card svg {
+            line-height: 1.1;
             margin-bottom: 1.5rem;
         }
 
-        /* Chat UI Section */
-        #chat {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .chat-container {
-            border: 2px solid var(--light-blue);
-            border-radius: 20px;
-            height: 400px;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-
-        .chat-header {
-            background: var(--primary-blue);
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
             color: white;
-            padding: 1rem;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
             font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(0, 86, 179, 0.3);
+            border: none;
         }
 
-        .chat-body {
-            flex-grow: 1;
-            padding: 1rem;
-            background: var(--white);
-            overflow-y: auto;
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(0, 86, 179, 0.4);
+        }
+
+        /* Animate Hospital Sign */
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.9; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .hero-image svg { animation: pulse 3s infinite ease-in-out; }
+
+        /* Features Section */
+        #about { background-color: #f9fbfc; }
+        .feature-card {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 24px;
+            box-shadow: var(--shadow-sm);
+            transition: 0.3s;
+            border: 1px solid transparent;
+        }
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--light-green);
+        }
+
+        /* Chat Section Improvements */
+        .chat-container {
+            background: white;
+            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: 24px;
+            height: 500px;
+            box-shadow: var(--shadow-lg);
         }
 
         .message {
-            margin-bottom: 1rem;
-            padding: 0.8rem;
-            border-radius: 10px;
-            max-width: 80% ;
+            animation: fadeIn 0.4s ease-out;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
         }
 
-        .bot-msg {
-            background: var(--light-blue);
-            align-self: flex-start;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .user-input {
-            display: flex;
-            padding: 1rem;
-            border-top: 1px solid #eee;
-        }
-
-        .user-input input {
-            flex-grow: 1;
-            border: 1px solid #ddd;
-            padding: 0.8rem;
-            border-radius: 25px;
-            outline: none;
-        }
-
-        /* Other Options / Services */
-        .health-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .service-item {
-            border: 1px solid var(--light-blue);
-            padding: 1.5rem;
-            border-radius: 10px;
-            text-align: center;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .service-item:hover {
-            background: var(--light-blue);
-        }
-
-        footer {
+        .user-msg {
             background: var(--primary-blue);
             color: white;
-            text-align: center;
+            align-self: flex-end;
+            margin-left: auto;
+        }
+
+        /* Health Hub Grid */
+        .service-item {
+            background: white;
+            border: 1px solid #eee;
             padding: 2rem;
-            margin-top: 2rem;
+            border-radius: 16px;
+            transition: 0.3s;
+        }
+        .service-item:hover {
+            background: var(--primary-blue);
+            color: white !important;
+        }
+        .service-item:hover p { color: #e0e0e0; }
+
+        footer {
+            background: #001d3d;
+            padding: 4rem 2rem;
         }
 
         @media (max-width: 768px) {
-            .hero { flex-direction: column; text-align: center; }
+            .hero { flex-direction: column; text-align: center; padding-top: 4rem; }
+            .hero h1 { font-size: 2.5rem; }
             .nav-links { display: none; }
         }
     </style>
@@ -241,24 +186,29 @@
     <nav>
         <a href="#" class="logo">Bophelo Bot AI</a>
         <ul class="nav-links">
-            <li><a href="#about">About Bophelo</a></li>
-            <li><a href="#chat">Bophelo Chat</a></li>
-            <li><a href="#health-hub">Health Services</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#chat">Chat</a></li>
+            <li><a href="#health-hub">Services</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
-        <a href="#chat" class="btn-primary" style="padding: 0.5rem 1.2rem; font-size: 0.9rem;">Get Started</a>
+        <a href="#chat" class="btn-primary" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">Get Started</a>
     </nav>
 
     <header class="hero">
         <div class="hero-content">
             <h1>Empowering Your Health Journey with AI.</h1>
-            <p>Bophelo Bot is your 24/7 digital health companion, providing instant medical insights, symptom tracking, and personalized wellness advice in your language.</p>
-            <a href="#chat" class="btn-primary">Start Chatting Now</a>
+            <p style="font-size: 1.25rem; margin-bottom: 2.5rem; color: var(--text-muted);">Bophelo Bot is your 24/7 digital health companion, providing instant insights and personalized wellness advice.</p>
+            <a href="#chat" class="btn-primary">Start Free Consultation</a>
         </div>
         <div class="hero-image">
-            <svg width="300" height="300" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="100" cy="100" r="80" fill="#e74c3c" />
-                <path d="M100 60 L100 140 M60 100 L140 100" stroke="#ffffff" stroke-width="15" stroke-linecap="round"/>
+            <svg width="320" height="320" viewBox="0 0 200 200">
+                <defs>
+                    <filter id="shadow">
+                        <feDropShadow dx="0" dy="4" stdDeviation="4" flood-opacity="0.2"/>
+                    </filter>
+                </defs>
+                <circle cx="100" cy="100" r="80" fill="#e74c3c" filter="url(#shadow)"/>
+                <path d="M100 60 L100 140 M60 100 L140 100" stroke="#ffffff" stroke-width="18" stroke-linecap="round"/>
             </svg>
         </div>
     </header>
@@ -266,30 +216,23 @@
     <section id="about">
         <div class="section-title">
             <h2>What Bophelo is All About</h2>
-            <p>Named after the Sesotho word for "Life," we aim to bridge the gap in healthcare accessibility.</p>
+            <p>Bridging the gap in healthcare accessibility.</p>
         </div>
         <div class="features">
             <div class="feature-card">
-                <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#2ecc71" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-                </svg>
+                <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#2ecc71" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                 <h3>Instant Triage</h3>
-                <p>Describe your symptoms and receive immediate guidance on what steps to take next.</p>
+                <p>Describe your symptoms and receive immediate guidance.</p>
             </div>
             <div class="feature-card">
-                <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#2ecc71" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-                </svg>
+                <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#2ecc71" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
                 <h3>Medication Reminders</h3>
-                <p>Never miss a dose again. Bophelo tracks your schedule and sends timely alerts.</p>
+                <p>Bophelo tracks your schedule and sends timely alerts.</p>
             </div>
             <div class="feature-card">
-                <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#2ecc71" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                </svg>
+                <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#2ecc71" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
                 <h3>Private & Secure</h3>
-                <p>Your health data is encrypted. Consult with confidence and total anonymity.</p>
+                <p>Your health data is encrypted and completely anonymous.</p>
             </div>
         </div>
     </section>
@@ -297,16 +240,16 @@
     <section id="chat">
         <div class="section-title">
             <h2>Bophelo Bot Chat</h2>
-            <p>Experience the AI. Ask a question about your health below.</p>
+            <p>Instant answers to your health concerns.</p>
         </div>
         <div class="chat-container">
-            <div class="chat-header">Bophelo AI Assistant</div>
-            <div class="chat-body">
-                <div class="message bot-msg">Hello! I am Bophelo Bot. How are you feeling today? I can help you check symptoms or find a nearby clinic.</div>
+            <div class="chat-header">Bophelo AI Assistant • Online</div>
+            <div class="chat-body" id="chat-body" style="display: flex; flex-direction: column;">
+                <div class="message bot-msg">Hello! I am Bophelo Bot. How are you feeling today?</div>
             </div>
             <div class="user-input">
-                <input type="text" placeholder="Type your health concern here...">
-                <button class="btn-primary" style="border: none; margin-left: 10px; cursor: pointer;">Send</button>
+                <input type="text" id="user-msg-input" placeholder="Type your health concern here...">
+                <button onclick="sendMessage()" class="btn-primary" style="padding: 0.6rem 1.5rem; margin-left: 10px;">Send</button>
             </div>
         </div>
     </section>
@@ -314,22 +257,26 @@
     <section id="health-hub">
         <div class="section-title">
             <h2>Health Hub</h2>
-            <p>Explore more features to manage your wellbeing.</p>
+            <p>Tools to manage your wellbeing.</p>
         </div>
         <div class="health-grid">
             <div class="service-item">
+                <span style="font-size: 2rem;">🔍</span>
                 <h4>Symptom Checker</h4>
                 <p>Advanced diagnostic tool.</p>
             </div>
             <div class="service-item">
+                <span style="font-size: 2rem;">📅</span>
                 <h4>Book Appointment</h4>
                 <p>Connect with real doctors.</p>
             </div>
             <div class="service-item">
+                <span style="font-size: 2rem;">📚</span>
                 <h4>Resource Library</h4>
                 <p>Health articles & tips.</p>
             </div>
             <div class="service-item">
+                <span style="font-size: 2rem;">🚨</span>
                 <h4>Emergency Help</h4>
                 <p>Local emergency contacts.</p>
             </div>
@@ -337,8 +284,40 @@
     </section>
 
     <footer>
-        <p>&copy; 2026 Bophelo Bot AI. Dedicated to a Healthier Africa.</p>
+        <p style="opacity: 0.8;">&copy; 2026 Bophelo Bot AI. Dedicated to a Healthier Africa.</p>
     </footer>
 
+    <script>
+        function sendMessage() {
+            const input = document.getElementById('user-msg-input');
+            const chatBody = document.getElementById('chat-body');
+            
+            if (input.value.trim() !== "") {
+                // User Message
+                const userDiv = document.createElement('div');
+                userDiv.className = 'message user-msg';
+                userDiv.textContent = input.value;
+                chatBody.appendChild(userDiv);
+                
+                const val = input.value.toLowerCase();
+                input.value = "";
+                
+                // Bot Thinking & Response
+                setTimeout(() => {
+                    const botDiv = document.createElement('div');
+                    botDiv.className = 'message bot-msg';
+                    
+                    if(val.includes("headache")) {
+                        botDiv.textContent = "I'm sorry you're feeling unwell. Are you experiencing any sensitivity to light or nausea?";
+                    } else {
+                        botDiv.textContent = "That sounds important. Could you tell me more about when these symptoms started?";
+                    }
+                    
+                    chatBody.appendChild(botDiv);
+                    chatBody.scrollTop = chatBody.scrollHeight;
+                }, 1000);
+            }
+        }
+    </script>
 </body>
 </html>
