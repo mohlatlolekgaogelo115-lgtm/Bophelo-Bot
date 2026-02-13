@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bophelo Bot AI | Your Life, Your Health</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #0056b3;
+            --secondary-blue: #007bff;
+            --light-blue: #e7f2f8;
+            --white: #ffffff;
+            --text-dark: #2d3436;
+            --text-muted: #636e72;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--text-dark);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* Navbar */
+        nav {
+            background: var(--white);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 5rem 5% 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(135deg, var(--white) 60%, var(--light-blue) 100%);
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-blue);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+        }
+
+        /* About Section */
+        #about {
+            background-color: #f9fbfc;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        /* Chat UI Section */
+        #chat {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .chat-container {
+            border: 2px solid var(--light-blue);
+            border-radius: 20px;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .chat-header {
+            background: var(--primary-blue);
+            color: white;
+            padding: 1rem;
+            font-weight: 600;
+        }
+
+        .chat-body {
+            flex-grow: 1;
+            padding: 1rem;
+            background: var(--white);
+            overflow-y: auto;
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            padding: 0.8rem;
+            border-radius: 10px;
+            max-width: 80% ;
+        }
+
+        .bot-msg {
+            background: var(--light-blue);
+            align-self: flex-start;
+        }
+
+        .user-input {
+            display: flex;
+            padding: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .user-input input {
+            flex-grow: 1;
+            border: 1px solid #ddd;
+            padding: 0.8rem;
+            border-radius: 25px;
+            outline: none;
+        }
+
+        /* Other Options / Services */
+        .health-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .service-item {
+            border: 1px solid var(--light-blue);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .service-item:hover {
+            background: var(--light-blue);
+        }
+
+        footer {
+            background: var(--primary-blue);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero { flex-direction: column; text-align: center; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo">Bophelo Bot AI</a>
+        <ul class="nav-links">
+            <li><a href="#about">About Bophelo</a></li>
+            <li><a href="#chat">Bophelo Chat</a></li>
+            <li><a href="#health-hub">Health Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <a href="#chat" class="btn-primary" style="padding: 0.5rem 1.2rem; font-size: 0.9rem;">Get Started</a>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Empowering Your Health Journey with AI.</h1>
+            <p>Bophelo Bot is your 24/7 digital health companion, providing instant medical insights, symptom tracking, and personalized wellness advice in your language.</p>
+            <a href="#chat" class="btn-primary">Start Chatting Now</a>
+        </div>
+        <div class="hero-image">
+            <svg width="300" height="300" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="100" cy="100" r="80" fill="#e7f2f8" />
+                <path d="M100 60 L100 140 M60 100 L140 100" stroke="#0056b3" stroke-width="15" stroke-linecap="round"/>
+            </svg>
+        </div>
+    </header>
+
+    <section id="about">
+        <div class="section-title">
+            <h2>What Bophelo is All About</h2>
+            <p>Named after the Sesotho word for "Life," we aim to bridge the gap in healthcare accessibility.</p>
+        </div>
+        <div class="features">
+            <div class="feature-card">
+                <h3>Instant Triage</h3>
+                <p>Describe your symptoms and receive immediate guidance on what steps to take next.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Medication Reminders</h3>
+                <p>Never miss a dose again. Bophelo tracks your schedule and sends timely alerts.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Private & Secure</h3>
+                <p>Your health data is encrypted. Consult with confidence and total anonymity.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="chat">
+        <div class="section-title">
+            <h2>Bophelo Bot Chat</h2>
+            <p>Experience the AI. Ask a question about your health below.</p>
+        </div>
+        <div class="chat-container">
+            <div class="chat-header">Bophelo AI Assistant</div>
+            <div class="chat-body">
+                <div class="message bot-msg">Hello! I am Bophelo Bot. How are you feeling today? I can help you check symptoms or find a nearby clinic.</div>
+            </div>
+            <div class="user-input">
+                <input type="text" placeholder="Type your health concern here...">
+                <button class="btn-primary" style="border: none; margin-left: 10px; cursor: pointer;">Send</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="health-hub">
+        <div class="section-title">
+            <h2>Health Hub</h2>
+            <p>Explore more features to manage your wellbeing.</p>
+        </div>
+        <div class="health-grid">
+            <div class="service-item">
+                <h4>Symptom Checker</h4>
+                <p>Advanced diagnostic tool.</p>
+            </div>
+            <div class="service-item">
+                <h4>Book Appointment</h4>
+                <p>Connect with real doctors.</p>
+            </div>
+            <div class="service-item">
+                <h4>Resource Library</h4>
+                <p>Health articles & tips.</p>
+            </div>
+            <div class="service-item">
+                <h4>Emergency Help</h4>
+                <p>Local emergency contacts.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Bophelo Bot AI. Dedicated to a Healthier Africa.</p>
+    </footer>
+
+</body>
+</html>
